@@ -2,6 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const fs = require('fs');
+const path = require('path');
 
 const app = express();
 app.use(cors());
@@ -322,6 +324,17 @@ app.post('/api/seed', async (req,res)=>{
 });
 
 app.get('/api/health', (req,res)=>res.json({ok:true}));
+
+const clientBuildPath = path.join(__dirname, '..', 'client', 'dist');
+const clientIndexPath = path.join(clientBuildPath, 'index.html');
+
+if (fs.existsSync(clientIndexPath)) {
+  app.use(express.static(clientBuildPath));
+  app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api/')) return next();
+    return res.sendFile(clientIndexPath);
+  });
+}
 
 const port = process.env.PORT || 5000;
 app.listen(port, ()=>console.log('Server listening on', port));

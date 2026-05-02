@@ -45,6 +45,13 @@ npm run dev
 
 3. Open the client in your browser (Vite will show the `localhost` port). Use the header buttons to `Seed Demo` and `Demo Login`.
 
+On Windows PowerShell, use these commands instead of `bash start.sh`:
+
+```powershell
+npm install
+npm run dev
+```
+
 ## Useful commands
 
 - Seed demo data (creates demo users/projects/tasks): `POST /api/seed` (button available in UI header)
@@ -80,12 +87,18 @@ Tip: to serve the client build from the Express server you can add static middle
 
 ## Railway deployment
 
-Railway can now detect the repo using the root `railway.json` and `start.sh` files.
+Railway now uses the root workspace `package.json` and `railway.json`.
 
-The startup script installs dependencies, builds the client, and starts the server:
+Build command:
 
 ```bash
-bash start.sh
+npm run build
+```
+
+Start command:
+
+```bash
+npm start
 ```
 
 Set the required environment variables in Railway:
