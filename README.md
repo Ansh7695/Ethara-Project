@@ -78,6 +78,23 @@ NODE_ENV=production npm start
 
 Tip: to serve the client build from the Express server you can add static middleware in `server/index.js` (I can add this for you if desired).
 
+## Railway deployment
+
+Railway can now detect the repo using the root `railway.json` and `start.sh` files.
+
+The startup script installs dependencies, builds the client, and starts the server:
+
+```bash
+bash start.sh
+```
+
+Set the required environment variables in Railway:
+
+- `MONGODB_URI`
+- `JWT_SECRET`
+- `PORT`
+- `NODE_ENV=production`
+
 ## API highlights
 
 - `POST /api/seed` — seed demo data
